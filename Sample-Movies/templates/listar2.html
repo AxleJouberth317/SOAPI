@@ -1,0 +1,57 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+	<meta charset="UTF-8">
+	<title>{% block title %}Document{% endblock %}</title>
+</head>
+<body>
+<div class="container">
+<table class="table table-bordered">
+	<thead>
+		<tr>
+			<td>#</td>
+			<td>Titulo</td>
+			<td>Usuario</td>
+			<td>Calificacion</td>
+			<td></td>
+
+		</tr>
+	</thead>
+	<tbody>
+		{% if object_list %}
+		{% for pelicula in object_list %}
+		<tr>
+			<td>{{ pelicula.id }}</td>
+			<td>{{ pelicula.titulo }}</td>
+			<td>{{ pelicula.usuario }}</td>
+			<td>{{ pelicula.calificacion }}</td>
+			<td> <a href="{% url 'actualizar-model' id=pelicula.id %}">Edit</a>   </td>
+			<td> <a href="{% url 'borrar-model' id=pelicula.id %}">Delete</a> </td>		
+		</tr>
+		{% endfor %}
+
+		
+		{% else %}
+		<h1>No hay registros de pelicula</h1>
+		{% endif %}
+	</tbody>
+</table>
+<div class="row">
+	<div class="col-md-6 col-md-offset-3">
+		<div class="form-group">
+			<a class="btn btn-primary" href="{% url 'agregar-model' %}">Crear calificacion</a>
+		</div>
+		
+		<div class="form-group">
+			<a class="btn btn-primary" href="{% url 'login_usuario' %}">Salir</a>
+		</div>
+	</div>
+</div>
+</div>
+<script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+<script src="{% static 'js/popper.min.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+</body>
+</html>
